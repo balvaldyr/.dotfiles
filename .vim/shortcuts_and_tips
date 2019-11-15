@@ -1,0 +1,28 @@
+## Reload .vimrc
+:so $MYVIMRC
+
+
+## Indenting
+
+       | Indent | Unindent |
+Normal |   >>   |   <<     |
+Insert | Ctrl-T | Ctrl-D   |
+Visual |   >    |   <      |
+
+## Windows
+
+Re-adjust window widths to split window evenly:
+N Ctrl-W =
+
+## Search and Replace
+# For selection/line:
+N :s/[search expression]/[replace expression]/[flags]
+# For whole file:
+N :%s/[search expression]/[replace expression]/[flags]
+
+flags:
+	g - global. Replace all instances in document without asking.
+
+## Visual Mode
+# To selection current block (innermost curly bracket enclosed block):
+N vi}
