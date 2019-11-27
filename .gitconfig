@@ -1,0 +1,27 @@
+[difftool]
+  prompt = false
+[difftool "meld"]
+  cmd = meld "$LOCAL" "$REMOTE"
+[merge]
+  tool = meld
+[mergetool]
+  prompt = false
+[mergetool "meld"]
+  cmd = meld --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\"
+
+[user]
+  name = Alexander Kane
+  email = alexander.kane@daqri.com
+[pager]
+  branch = false
+
+[alias]
+	lg = !git --no-pager log --abbrev-commit --decorate --format=format:'%C(yellow)%h%C(reset) - %C(green)(%ai)%C(reset) %C(magenta)%an%C(reset) %C(black)%s%C(reset) %C(yellow)%d%C(reset)' -n 10 --date=short
+	lg2 = !git --no-pager log --oneline --graph -n 15 --date=short
+	csv = "!git --no-pager log --abbrev-commit --decorate --format=format:'%C(yellow)%h%C(reset);%C(green)(%ai)%C(reset);%C(magenta)%an%C(reset);%C(black)%s%C(reset);%C(yellow)%d%C(reset)' -n 10 --date=short"
+	change = !git difftool --dir-diff $1^!
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
