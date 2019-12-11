@@ -41,7 +41,7 @@ let g:airline_theme='papercolor'
 " Inactive windows have dark airline bar
 "let g:airline_solarized_dark_inactive_border=1
 "let g:airline_solarized_normal_green=1
-let &colorcolumn=join(range(81,299),",")
+let &colorcolumn=join(range(120,299),",")
 " highlight ColorColumn ctermbg=NONE guibg=#DDDDDD
 
 " Remove separater character between split views (windows)
@@ -53,10 +53,10 @@ let g:buffergator_show_full_directory_path=0
 let g:buffergator_vsplit_size=50
 
 " Use tabs not spaces with width 8:
-:set noexpandtab
+:set expandtab
 :set copyindent
 :set preserveindent
-:set softtabstop=0
+:set softtabstop=4
 :set shiftwidth=4
 :set tabstop=4
 " VHDL uses width 4

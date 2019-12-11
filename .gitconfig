@@ -20,6 +20,7 @@
 	lg2 = !git --no-pager log --oneline --graph -n 15 --date=short
 	csv = "!git --no-pager log --abbrev-commit --decorate --format=format:'%C(yellow)%h%C(reset);%C(green)(%ai)%C(reset);%C(magenta)%an%C(reset);%C(black)%s%C(reset);%C(yellow)%d%C(reset)' -n 10 --date=short"
 	change = !git difftool --dir-diff $1^!
+	find = log --all --pretty=\"format:%Cgreen%H %Cblue%s\n%b%Creset\" --name-status --grep
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

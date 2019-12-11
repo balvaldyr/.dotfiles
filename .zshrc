@@ -1,8 +1,9 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+emulate sh -c 'source /etc/profile'
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/alexander/.oh-my-zsh"
+export ZSH="/home/akane/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -27,8 +28,14 @@ ZSH_THEME="avit-light"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -63,9 +70,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-)
+plugins=()
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,7 +103,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export LM_LICENSE_FILE="5280@quartus.daqri.info"
+export BUILD_LOCAL=y
 
 # Colors for 'ls' command
 LS_COLORS=$LS_COLORS:'di=0;34:'
@@ -110,6 +115,32 @@ export LS_COLORS
 BAT_THEME=base16-papercolor-light
 export BAT_THEME
 
-export ANDROID_SDK=/home/alexander/Android/Sdk
-export ANDROID_NDK=/home/alexander/Android/Sdk/ndk/20.0.5594570
-export ANDROID_HOME=$ANDROID_SDK
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/akane/google-cloud-sdk/path.zsh.inc' ]; then . '/home/akane/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/akane/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/akane/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Different scripts use different variables to reference Sdk install location
+export ANDROID_HOME=~/Android/Sdk
+export ANDROID_SDK_ROOT=~/Android/Sdk
+export ANDROID_SDK=~/Android/Sdk
+export ANDROID_NDK=${ANDROID_SDK}/ndk/20.1.5948944
+
+export HERMOSA_SNAP_LIBS=~/Documents/hermosa/LINUX/android/vendor/snap/hermosa/snap/lib
+
+export ADB=/home/akane/Android/Sdk/platform-tools/adb
+
+export BUILD_LOCAL=y
+
+and_platform_path="$HOME/Android/Sdk/platform-tools"
+if [ -d "$and_platform_path" ] ; then
+  PATH="$PATH:$and_platform_path"
+fi
+
+ndk_path="$HOME/Android/Sdk/ndk/20.1.5948944"
+if [ -d "$ndk_path" ] ; then
+  PATH="$PATH:$ndk_path"
+fi
+export PATH 
