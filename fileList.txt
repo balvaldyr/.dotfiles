@@ -1,4 +1,5 @@
-.gitconfig
 .vimrc
 .zshrc
-.vim/
+.vim
+.config/i3
+.config/bat/themes/papercolor-16
