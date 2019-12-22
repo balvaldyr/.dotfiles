@@ -92,6 +92,9 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 focus_follows_mouse no
 
+# Multimonitor setup
+bindsym $mod+Shift+a exec --no-startup-id ~/.monitor_toggle
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down

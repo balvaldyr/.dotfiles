@@ -1,5 +1,7 @@
 .vimrc
 .zshrc
 .vim
+.config/dunst
 .config/i3
 .config/bat/themes/papercolor-16
+.monitor_toggle
