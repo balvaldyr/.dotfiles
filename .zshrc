@@ -103,7 +103,6 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export BUILD_LOCAL=y
 
 # Colors for 'ls' command
 LS_COLORS=$LS_COLORS:'di=0;34:'
@@ -144,3 +143,7 @@ if [ -d "$ndk_path" ] ; then
   PATH="$PATH:$ndk_path"
 fi
 export PATH 
+
+
+autoload -Uz compinit
+compinit
