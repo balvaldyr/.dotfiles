@@ -2,6 +2,9 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 # colors:
 
+exec --no-startup-id xrandr --output eDP-1 --mode 2560x1440
+exec --no-startup-id "xsetroot -solid \'#eeeeee\'"
+
 set $s_base_0_3   #002b36
 set $s_base_0_2   #073642
 set $s_base_0_1   #586e75
@@ -20,6 +23,24 @@ set $s_cyan     #2aa198
 set $s_green    #859900
 set $s_custom   #1c5766
 
+# Light theme
+set $pb_c00 #444444
+set $pb_c01 #9b0000		
+set $pb_c02 #009c00		
+set $pb_c03 #9b5500		
+set $pb_c04 #00559b		
+set $pb_c05 #76009b		
+set $pb_c06 #009b9b		
+set $pb_c07 #bcbcbc		
+set $pb_c08 #878787
+set $pb_c09 #d00000
+set $pb_c10 #7bb000
+set $pb_c11 #cd5c00
+set $pb_c12 #0093bf
+set $pb_c13 #cd0082
+set $pb_c14 #00af5f
+set $pb_c15 #eeeeee
+
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 
@@ -27,7 +48,7 @@ set $mod Mod4
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 3
+new_window pixel 4
 new_float normal
 
 # Hide borders
@@ -35,7 +56,7 @@ hide_edge_borders none
 
 # change borders
 bindsym $mod+u border none
-bindsym $mod+y border pixel 3
+bindsym $mod+y border pixel 4
 bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -47,12 +68,14 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec gnome-terminal
+#bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -combi-modi run#drun -show combi -modi combi#window
+#rofi -combi-modi run,drun -show combi -modi combi
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -61,9 +84,9 @@ bindsym $mod+z exec --no-startup-id morc_menu
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-exec --no-startup-id volumeicon
+#exec --no-startup-id volumeicon
 bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-#exec --no-startup-id pulseaudio
+exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
 
@@ -77,7 +100,8 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 bindsym $mod+Ctrl+b exec sakura -e 'bmenu'
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
-bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec nautilus
+#bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec terminal -e 'mocp'
@@ -164,12 +188,12 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 1: 1(minicom)
-set $ws2 2: 2(term0)
-set $ws3 3: 3(text)
+set $ws1 1: 1(term0)
+set $ws2 2: 2(term1)
+set $ws3 3: 3(term2)
 set $ws4 4: 4(ffox)
 set $ws5 5: 5(chrome)
-set $ws6 6: 6(term1)
+set $ws6 6: 6(files)
 set $ws7 7: 7(slack)
 set $ws8 8
 
@@ -228,6 +252,9 @@ for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
 for_window [title="About Pale Moon"] floating enable
 for_window [class="Pamac-manager"] floating enable
+for_window [class="Nautilus"] border normal
+for_window [class="Eog"] border normal
+for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
@@ -249,6 +276,10 @@ bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Lock screen
+set $Locker i3lock
+bindsym $mod+9 exec --no-startup-id $Locker
 
 # Set shut down, restart and locking features
 bindsym $mod+Escape mode "$mode_system"
@@ -290,26 +321,26 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-# Lock screen
-bindsym $mod+9 exec --no-startup-id blurlock
+# Ensure gtk theme is applied
+exec_always --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 
 # Autostart applications
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+# temp: exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# temp: exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 #exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 #exec --no-startup-id pamac-tray
 #exec --no-startup-id clipit
-# exec --no-startup-id blueman-applet
+exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
 # exec --no-startup-id xautolock -time 10 -locker blurlock
-exec --no-startup-id xautolock -time 10 -corners 00-+ -cornerdelay 1 -cornerredelay 5 -locker blurlock
+exec --no-startup-id xautolock -time 10 -corners 00-+ -cornerdelay 1 -cornerredelay 5 -locker $Locker
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec "setxkbmap -option 'grp:alt_shift_toggle' -layout us,de"
+exec --no-startup-id "setxkbmap -print -verbose 10 -option 'grp:alt_shift_toggle' -layout us,de"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -344,8 +375,9 @@ set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-	#i3bar_command i3bar
+	#status_command ~/.config/i3/bumblebee-status/bumblebee-status -m nic load cpu memory battery date time pasink pasource dnf -p interval=2.5 time.format="%H:%M CW %V" date.format="%a, %b %d %Y" -t solarized-powerline
 	status_command i3status
+	#status_command i3blocks
 	#status_command i3status-rs ~/.config/i3/status.toml
 	position bottom
 
@@ -362,14 +394,14 @@ bar {
 	colors {
 #		background $transparent
 		#background #073642
-		background #002b36
-       		statusline $s_base_1
-		separator  #073642
+		background $pb_c15
+       	statusline $pb_c00
+		separator  $pb_c00
 #                                  border     backgr.     text
-		focused_workspace        $s_cyan     $s_cyan     $s_base_3
-		active_workspace         $s_violet   $s_violet   $s_base_3
-		inactive_workspace       #073642     #073642     $s_base_3
-		urgent_workspace         $s_magenta  $s_magenta  $s_base_3
+		focused_workspace          $pb_c12    $pb_c12    $pb_c15
+		active_workspace           $pb_c08    $pb_c08    $pb_c07
+		inactive_workspace         $pb_c08    $pb_c08    $pb_c15
+		urgent_workspace           $pb_c13    $pb_c13    $pb_c15 
 	}
 }
 
@@ -378,10 +410,10 @@ bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                 border     backgr.     text      indic.    child_border
-client.focused          $s_cyan    $s_cyan     $s_base_3 $s_violet
-client.focused_inactive #073642    #073642     $s_base_2 $s_violet
-client.unfocused        #073642    #073642     $s_base_1 #586e75
-client.urgent           $s_magenta $s_magenta  $s_base_3 $s_red
+client.focused          $pb_c04    $pb_c04     $pb_10    $pb_c12   $pb_c04 
+client.focused_inactive $pb_c07    $pb_c07     $pb_10    $pb_c07   $pb_c07
+client.unfocused        $pb_c07    $pb_c07     $pb_10    $pb_c07   $pb_c07
+client.urgent           $pb_13     $pb_13  $pb_10    $s_red    $pb_c13
 client.placeholder      #000000    #0c0c0c     #ffffff   #000000    #0c0c0c
 
 client.background       #2B2C2B
