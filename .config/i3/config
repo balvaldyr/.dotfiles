@@ -3,7 +3,6 @@
 # colors:
 
 exec --no-startup-id xrandr --output eDP-1 --mode 2560x1440
-exec --no-startup-id "xsetroot -solid \'#eeeeee\'"
 
 set $s_base_0_3   #002b36
 set $s_base_0_2   #073642
@@ -354,24 +353,24 @@ exec --no-startup-id "setxkbmap -print -verbose 10 -option 'grp:alt_shift_toggle
 # to:
 # background $term_background
 # Same logic applied to everything else.
-set_from_resource $term_background background
-set_from_resource $term_foreground foreground
-set_from_resource $term_color0     color0
-set_from_resource $term_color1     color1
-set_from_resource $term_color2     color2
-set_from_resource $term_color3     color3
-set_from_resource $term_color4     color4
-set_from_resource $term_color5     color5
-set_from_resource $term_color6     color6
-set_from_resource $term_color7     color7
-set_from_resource $term_color8     color8
-set_from_resource $term_color9     color9
-set_from_resource $term_color10    color10
-set_from_resource $term_color11    color11
-set_from_resource $term_color12    color12
-set_from_resource $term_color13    color13
-set_from_resource $term_color14    color14
-set_from_resource $term_color15    color15
+# set_from_resource $term_background background
+# set_from_resource $term_foreground foreground
+# set_from_resource $term_color0     color0
+# set_from_resource $term_color1     color1
+# set_from_resource $term_color2     color2
+# set_from_resource $term_color3     color3
+# set_from_resource $term_color4     color4
+# set_from_resource $term_color5     color5
+# set_from_resource $term_color6     color6
+# set_from_resource $term_color7     color7
+# set_from_resource $term_color8     color8
+# set_from_resource $term_color9     color9
+# set_from_resource $term_color10    color10
+# set_from_resource $term_color11    color11
+# set_from_resource $term_color12    color12
+# set_from_resource $term_color13    color13
+# set_from_resource $term_color14    color14
+# set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
@@ -413,7 +412,7 @@ bindsym $mod+m bar mode toggle
 client.focused          $pb_c04    $pb_c04     $pb_10    $pb_c12   $pb_c04 
 client.focused_inactive $pb_c07    $pb_c07     $pb_10    $pb_c07   $pb_c07
 client.unfocused        $pb_c07    $pb_c07     $pb_10    $pb_c07   $pb_c07
-client.urgent           $pb_13     $pb_13  $pb_10    $s_red    $pb_c13
+client.urgent           $pb_13     $pb_13      $pb_10    $s_red    $pb_c13
 client.placeholder      #000000    #0c0c0c     #ffffff   #000000    #0c0c0c
 
 client.background       #2B2C2B
