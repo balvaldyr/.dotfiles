@@ -179,24 +179,42 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
+#setting workspaces
+set $ws0 0 0 
+set $ws1 1 1 
+set $ws2 2 2 
+set $ws3 3 3 
+set $ws4 4 4 
+set $ws5 5 5 
+set $ws6 6 6 
+set $ws7 7 7 
+set $ws8 8 8 
+set $ws9 9 9 
+set $ws10 10 10 
+
+# set $ws10 10 10   
+# set $ws0 0 0  
+# set $ws1 1 1  
+# set $ws2 2 2  
+# set $ws3 3 3   
+# set $ws4 4 4  
+# set $ws5 5 5  
+# set $ws6 6 6  
+# set $ws7 7 7  
+# set $ws8 8 8  
+# set $ws9 9 9   
+# set $ws10 10 10   
+# swappables
+#                               
+# the music / spotify / media workspace needs a new icon
+
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
-# Workspace names
-# to display names or symbols instead of plain workspace numbers you can use
-# something like: set $ws1 1:mail
-#                 set $ws2 2:
-set $ws1 1: 1(term0)
-set $ws2 2: 2(term1)
-set $ws3 3: 3(term2)
-set $ws4 4: 4(ffox)
-set $ws5 5: 5(chrome)
-set $ws6 6: 6(files)
-set $ws7 7: 7(slack)
-set $ws8 8
-
 # switch to workspace
+###Number Row
+bindsym $mod+grave workspace $ws0
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -205,8 +223,13 @@ bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # Move focused container to workspace
+###Number Row
+bindsym $mod+Ctrl+grave move container to workspace $ws0
+bindsym $mod+Ctrl+Tab move container to workspace $terb
 bindsym $mod+Ctrl+1 move container to workspace $ws1
 bindsym $mod+Ctrl+2 move container to workspace $ws2
 bindsym $mod+Ctrl+3 move container to workspace $ws3
@@ -215,8 +238,11 @@ bindsym $mod+Ctrl+5 move container to workspace $ws5
 bindsym $mod+Ctrl+6 move container to workspace $ws6
 bindsym $mod+Ctrl+7 move container to workspace $ws7
 bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9
+bindsym $mod+Ctrl+0 move container to workspace $ws10
 
 # Move to workspace with focused container
+bindsym $mod+Shift+grave move container to workspace $ws0; workspace $ws0
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
@@ -225,12 +251,11 @@ bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws7; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws8; workspace $ws10
 
 # Open applications on specific workspaces
-# assign [class="Thunderbird"] $ws1
-# assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
-assign [class="Sublime_text"] $ws3
 assign [class="Firefox"] $ws4
 assign [class="Google-chrome"] $ws5
 
@@ -278,7 +303,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # Lock screen
 set $Locker i3lock
-bindsym $mod+9 exec --no-startup-id $Locker
 
 # Set shut down, restart and locking features
 bindsym $mod+Escape mode "$mode_system"
@@ -403,6 +427,28 @@ bar {
 		urgent_workspace           $pb_c13    $pb_c13    $pb_c15 
 	}
 }
+
+# bar {
+#     font pango:Helvetica-Normal,Hack,FontAwesome 20
+#     position bottom
+#     # enables transparency
+#     i3bar_command i3bar -t
+#     #tray_output none
+#     status_command i3blocks -c ~/.config/i3/theme/i3blocks.conf
+# 
+# 	colors {
+# 		background  #0d4d6c00
+# 		statusline  #79C3C4ff
+# 		#statusline  #635248ff
+# 		separator   #BCCC3C00
+# #                           border    bckgrnd   textcol
+# 		focused_workspace   #0d4d6c00 #0d4d6c00 #DCE9D8
+# 		active_workspace    #0d4d6c00 #0d4d6c00 #B6C9C5
+# 		inactive_workspace  #0d4d6c00 #0d4d6c00 #74a893
+# 		urgent_workspace    #0d4d6c00 #0d4d6c00 #FFCB72
+# 	}
+# }
+
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
