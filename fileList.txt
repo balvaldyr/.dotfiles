@@ -4,4 +4,5 @@
 .config/dunst
 .config/i3
 .config/bat/themes/papercolor-16
+.config/rofi
 .monitor_toggle

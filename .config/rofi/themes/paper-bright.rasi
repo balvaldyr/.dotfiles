@@ -1,0 +1,147 @@
+/**
+ * A floating box version of the paper theme.
+ *
+ * User: Qball
+ * Copyright: Dave Davenport
+ */
+* {
+    black-dark:   #444444;
+    black-light:  #878787;
+    red-dark:     #9b0000;
+    red-light:    #d00000;
+    green-dark:   #009c00;
+    green-light:  #7bb000;
+    yellow-dark:  #9b5500;
+    yellow-light: #cd5c00;
+    blue-dark:    #00559b;
+    blue-light:   #0093bf;
+    magenta-dark: #76009b;
+    magenta-light:#cd0082;
+    cyan-dark:    #009b9b;
+    cyan-light:   #00af5f;
+    white-dark:   #cccccc;
+    white-light:  #eeeeee;
+
+    spacing: 2;
+    background-color: #00000000;
+    border-color: @yellow-dark;
+    anchor: south;
+    location: center;
+}
+#window {
+    transparency: "screenshot";
+    background-color: @white-light; 
+    border: 4px;
+    border-radius: 10px;
+    padding: 24px 0% 16px 0%;
+    x-offset: 0;
+    y-offset: -10%;
+}
+#mainbox {
+    padding: 0px;
+    border: 0;
+    spacing: 20px;
+}
+#message {
+    border: 0px; 
+    padding: 1em; 
+    background-color: @white-light; 
+    text-color: @back;
+}
+#textbox normal {
+    text-color: @blue-dark;
+    padding: 0;
+    border: 0;
+}
+#listview {
+    fixed-height: 1;
+    border: 0px;
+    padding: 0em;
+    reverse: false;
+
+    columns: 1;
+    background-color: @white-light; 
+}
+#element {
+    border: 0;
+    padding: 2px 20px;
+    highlight: bold ;
+}
+#element normal.normal {
+    text-color: @blue-dark;
+    background-color: @white-light;
+}
+#element normal.urgent {
+    text-color: @magenta-light;
+    background-color: @white-light;
+}
+#element normal.active {
+    text-color: @blue-dark;
+    background-color: @white-light;
+}
+#element selected.normal {
+    text-color: @white-light;
+    background-color: @blue-light;
+}
+#element selected.urgent {
+    text-color: @white-light;
+    background-color: @magenta-light;
+}
+#element selected.active {
+    text-color: @white-light;
+    background-color: @blue-dark;
+}
+#element alternate.normal {
+    text-color: @black-dark;
+    background-color: @white-light;
+}
+#element alternate.urgent {
+    text-color: #D75F00FF;
+    background-color: @white-light;
+}
+#element alternate.active {
+    text-color: @blue-dark;
+    background-color: @white-light;
+}
+#scrollbar {
+    border: 0;
+    padding: 0;
+}
+#inputbar {
+    spacing: 2px;
+    border: 0px;
+    padding: 0.5em 1em;
+    margin: 4px 0;
+    background-color: @yellow-dark;
+    index: 0;
+}
+#inputbar normal {
+    foreground-color: #002B36FF;
+    background-color: #F5F5F500;
+}
+
+#sidebar {
+    border: 2px;
+    padding: 0.5em 1em;
+    background-color: @white-light;
+    index: 10;
+}
+#button selected {
+    text-color: #4271AEFF;
+}
+
+#inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+#prompt {
+    text-color: @white-dark;
+}
+#textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+    text-color: @white-dark;
+}
+#entry {
+    text-color: @white-dark;
+}
