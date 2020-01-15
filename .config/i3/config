@@ -2,7 +2,6 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 # colors:
 
-exec --no-startup-id xrandr --output eDP-1 --mode 2560x1440
 
 set $s_base_0_3   #002b36
 set $s_base_0_2   #073642
@@ -346,6 +345,7 @@ mode "resize" {
 
 # Ensure gtk theme is applied
 exec_always --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
+exec --no-startup-id ~/.monitor_toggle startup
 
 # Autostart applications
 # temp: exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

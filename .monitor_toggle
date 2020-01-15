@@ -1,27 +1,105 @@
 #!/bin/bash
-EXTERNAL_OUTPUT="DP-2"
+
 INTERNAL_OUTPUT="eDP-1"
+EXTERNAL_OUTPUT="none"
+
+function setMonitorMode {
+    if [ $1 = "M_EXTEND" ]; then
+        msg_title="Monitor - Extend"
+        msg="Display stretches across both the laptop screen and external monitor"
+        xrandr --output $INTERNAL_OUTPUT --mode 1920x1080 --output $EXTERNAL_OUTPUT --auto --right-of $INTERNAL_OUTPUT
+    elif [ $1 = "M_EXTERNAL" ]; then
+        msg_title="Monitor - External"
+        msg="Display only on external monitor"
+        xrandr --output $INTERNAL_OUTPUT --off --output $EXTERNAL_OUTPUT --auto
+    elif [ $1 = "M_INTERNAL" ]; then
+        msg_title="Monitor - Internal"
+        msg="Display only on laptop screen"
+        xrandr --output $INTERNAL_OUTPUT --mode 1920x1080 --output $EXTERNAL_OUTPUT --off
+    elif [ $1 = "M_CLONE" ]; then
+        msg_title="Monitor - Clone"
+        msg="Clone laptop screen to external display"
+        xrandr --output $INTERNAL_OUTPUT --mode 1920x1080 --output $EXTERNAL_OUTPUT --mode 1920x1080 --same-as $INTERNAL_OUTPUT
+    else
+        notify-send --urgency=critical "Monitor" "Error, invalid monitor mode"
+        exit
+    fi
+    if [ $2 = "VERBOSE" ]; then
+        notify-send --urgency=low "$msg_title" "$msg"
+    fi
+    echo "${1}" > /tmp/monitor_mode.dat
+}
+
+
+
+
+
+# Use xrandr to find if an external monitor is connected
+while read line ; do 
+    if [ "$INTERNAL_OUTPUT" != "$line" ]; then
+        EXTERNAL_OUTPUT="$line"
+    fi
+done <<< "$(xrandr | grep "\sconnected" | awk '{print $1}')"
+
+echo "Internal : $INTERNAL_OUTPUT"
+echo "External : $EXTERNAL_OUTPUT"
+
+# Modes: M_INTERNAL, M_EXTERNAL, M_CLONE, M_EXTEND
+# Arguments: "Startup" "Dual"
+# Startup: 
+#   If no external display
+#       set mode to M_INTERNAL
+#   Else # External present
+#       if previous mode was M_INTERNAL
+#           set mode to M_EXTERNAL
+#       else
+#           restore previous mode
+# Dual:
+#   If no external display
+#       set mode to M_INTERNAL
+#   Else 
+#       Rotate mode between all 4 options
+# No arguments:
+#   If no external display
+#       set mode to M_INTERNAL
+#   Else
+#       Rotate mode between M_INTERNAL and M_EXTERNAL
 
 # if we don't have a file, start at zero
 if [ ! -f "/tmp/monitor_mode.dat" ] ; then
-  monitor_mode="all"
-
+  monitor_mode="M_INTERNAL"
 # otherwise read the value from the file
 else
   monitor_mode=`cat /tmp/monitor_mode.dat`
 fi
 
-if [ $monitor_mode = "all" ]; then
-        monitor_mode="EXTERNAL"
-        xrandr --output $INTERNAL_OUTPUT --off --output $EXTERNAL_OUTPUT --auto
-elif [ $monitor_mode = "EXTERNAL" ]; then
-        monitor_mode="INTERNAL"
-        xrandr --output $INTERNAL_OUTPUT --mode 1920x1080 --output $EXTERNAL_OUTPUT --off
-elif [ $monitor_mode = "INTERNAL" ]; then
-        monitor_mode="CLONES"
-        xrandr --output $INTERNAL_OUTPUT --mode 1920x1080 --output $EXTERNAL_OUTPUT --auto --same-as $INTERNAL_OUTPUT
+shopt -s nocasematch
+verbosity="VERBOSE"
+if [[ $1 = "Startup" ]] ; then
+    if [ $EXTERNAL_OUTPUT = "none" ]; then
+        monitor_mode="M_INTERNAL"
+    fi
+#    verbosity="SILENT"
+elif [[ $1 = "Dual" ]] ; then
+    if [ $EXTERNAL_OUTPUT = "none" ]; then
+        monitor_mode="M_INTERNAL"
+    elif [ $monitor_mode = "M_EXTEND" ]; then
+        monitor_mode="M_EXTERNAL"
+    elif [ $monitor_mode = "M_EXTERNAL" ]; then
+        monitor_mode="M_INTERNAL"
+    elif [ $monitor_mode = "M_INTERNAL" ]; then
+        monitor_mode="M_CLONE"
+    else
+        monitor_mode="M_EXTEND"
+    fi
 else
-        monitor_mode="all"
-        xrandr --output $INTERNAL_OUTPUT --mode 1920x1080 --output $EXTERNAL_OUTPUT --auto --right-of $INTERNAL_OUTPUT
+    if [ $EXTERNAL_OUTPUT = "none" ]; then
+        monitor_mode="M_INTERNAL"
+    elif [ $monitor_mode = "M_EXTERNAL" ]; then
+        monitor_mode="M_INTERNAL"
+    else
+        monitor_mode="M_EXTERNAL"
+    fi
 fi
-echo "${monitor_mode}" > /tmp/monitor_mode.dat
+
+setMonitorMode $monitor_mode $verbosity
