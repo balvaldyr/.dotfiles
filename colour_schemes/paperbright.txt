@@ -1,0 +1,8 @@
+Black	#444444     #878787
+Red     #9b0000     #d00000
+Green   #009c00     #7bb000
+Yellow  #9b5500     #cd5c00
+Blue    #00559b     #0093bf
+Magenta #76009b     #cd0082
+Cyan    #009b9b     #00af5f
+White   #bcbcbc     #eeeeee
