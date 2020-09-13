@@ -262,7 +262,7 @@
 [urgency_critical]
     background = "#cd0082"
     foreground = "#eeeeee"
-    timeout = 0
+    timeout = 10
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon
 
