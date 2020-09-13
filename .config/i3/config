@@ -400,11 +400,12 @@ exec --no-startup-id "setxkbmap -print -verbose 10 -option 'grp:alt_shift_toggle
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
 	#status_command ~/.config/i3/bumblebee-status/bumblebee-status -m nic load cpu memory battery date time pasink pasource dnf -p interval=2.5 time.format="%H:%M CW %V" date.format="%a, %b %d %Y" -t solarized-powerline
-	status_command i3status
-	#status_command i3blocks
+	#status_command i3status
+#	status_command i3blocks
+     status_command i3blocks -c ~/.config/i3/theme/i3blocks.conf
 	#status_command i3status-rs ~/.config/i3/status.toml
 	position bottom
-    workspace_min_width 40 
+#    workspace_min_width 40 
     height 40
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
@@ -414,7 +415,7 @@ bar {
 	bindsym button5 nop
 #	font pango:Bitstream Vera Sans, FontAwesome 12
 #    font pango:Helvetica-Normal,Hack,FontAwesome 14
-    font pango:Fira Code,Hack,FontAwesome 16
+    font pango:Fira Code,Font Awesome 5 Free,Font Awesome 5 Brands,Hack 16
 #   font xft:URWGothic-Book 11
 	strip_workspace_numbers yes
 
