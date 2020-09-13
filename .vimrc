@@ -3,8 +3,11 @@ execute pathogen#infect()
 " Syntex highlighting
 syntax on
 filetype plugin indent on
-autocmd BufRead,BufNewFile *.inc set filetype=c
-autocmd BufRead,BufNewFile *.tasklist set filetype=c
+autocmd BufRead,BufNewFile *.inc,*.tasklist set filetype=c
+autocmd BufRead,BufNewFile *.vhd,*.vhdl set filetype=vhdl
+
+" Highlight trailing whitespace
+let c_space_errors = 1
 
 " Remove command compatibility with old vim version
 set nocompatible
@@ -53,7 +56,7 @@ let g:buffergator_sort_regime='basename'
 let g:buffergator_show_full_directory_path=0
 let g:buffergator_vsplit_size=50
 
-" Use tabs not spaces with width 8:
+" Use tabs not spaces with width 4:
 :set expandtab
 :set copyindent
 :set preserveindent
@@ -62,4 +65,4 @@ let g:buffergator_vsplit_size=50
 :set tabstop=4
 
 " VHDL uses width 4
-autocmd Filetype vhdl setlocal ts=4 sw=4
+autocmd Filetype vhdl setlocal ts=3 sw=3
