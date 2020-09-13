@@ -126,6 +126,7 @@ export ANDROID_HOME=~/Android/Sdk
 export ANDROID_SDK_ROOT=~/Android/Sdk
 export ANDROID_SDK=~/Android/Sdk
 export ANDROID_NDK=${ANDROID_SDK}/ndk/20.1.5948944
+export ANDROID_NDK_HOME=$ANDROID_NDK
 
 export HERMOSA_SNAP_LIBS=~/Documents/hermosa/LINUX/android/vendor/snap/hermosa/snap/lib
 
@@ -147,3 +148,5 @@ export PATH
 
 autoload -Uz compinit
 compinit
+
+alias remote_mm="bash ~/Documents/hermosa/utils/remote_work/remote_mm.sh"
