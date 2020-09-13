@@ -361,15 +361,19 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 #exec --no-startup-id pamac-tray
 #exec --no-startup-id clipit
-exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
 # exec --no-startup-id xautolock -time 10 -locker blurlock
-exec --no-startup-id xautolock -time 10 -corners 00-+ -cornerdelay 1 -cornerredelay 5 -locker $Locker
+
+# DOES NOT RUN
+exec --no-startup-id xautolock -time 10 -corners 0000 -locker $Locker
+exec imwheel --kill --buttons "4 5"
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec --no-startup-id "setxkbmap -print -verbose 10 -option 'grp:alt_shift_toggle' -layout us,de"
+
+# DOES NOT RUN
+exec --no-startup-id "setxkbmap -layout us,de -option 'grp:ctrl_alt_toggle'"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -429,10 +433,10 @@ bar {
 		#background #073642
 		background $pb_c15
        	statusline $pb_c00
-		separator  $pb_c00
+		separator  $pb_c15
 #                                  border     backgr.     text
 		focused_workspace          $pb_c12    $pb_c12    $pb_c15
-		active_workspace           $pb_c08    $pb_c08    $pb_c07
+		active_workspace           $pb_c08    $pb_c00    $pb_c15
 		inactive_workspace         $pb_c08    $pb_c08    $pb_c15
 		urgent_workspace           $pb_c13    $pb_c13    $pb_c15 
 	}
@@ -466,8 +470,8 @@ bindsym $mod+m bar mode toggle
 # Theme colors
 # class                 border     backgr.     text      indic.    child_border
 client.focused          $pb_c04    $pb_c04     $pb_10    $pb_c12   $pb_c04 
-client.focused_inactive $pb_c07    $pb_c07     $pb_10    $pb_c07   $pb_c07
-client.unfocused        $pb_c07    $pb_c07     $pb_10    $pb_c07   $pb_c07
+client.focused_inactive $pb_c07    $pb_c12     $pb_10    $pb_c07   $pb_c07
+client.unfocused        $pb_c07    $pb_c00     $pb_10    $pb_c07   $pb_c07
 client.urgent           $pb_13     $pb_13      $pb_10    $s_red    $pb_c13
 client.placeholder      #000000    #0c0c0c     #ffffff   #000000    #0c0c0c
 
