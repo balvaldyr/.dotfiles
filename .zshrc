@@ -131,6 +131,8 @@ export ANDROID_NDK_HOME=$ANDROID_NDK
 export HERMOSA_SNAP_LIBS=~/Documents/hermosa/LINUX/android/vendor/snap/hermosa/snap/lib
 
 export ADB=/home/akane/Android/Sdk/platform-tools/adb
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export GRADLE_OPTS="-Xms24m -Xmx24g -Dorg.gradle.daemon=false"
 
 export BUILD_LOCAL=y
 
